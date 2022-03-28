@@ -1,11 +1,13 @@
 import React from "react";
 import Banner from "./banner/Banner";
+import Navbar from "./navbar/Navbar";
 import Row from "./row/Row";
 import requests from "./utils/request";
 
 const Main = () => {
   return (
     <div>
+      <Navbar />
       <Banner />
       <Row
         isFirstRow
