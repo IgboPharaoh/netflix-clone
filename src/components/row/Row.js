@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "./API/axios";
+import axios from "../API/axios";
+import "./Row.css";
 
-const baseURL = "https://image.tmdb.org/t/p/original/";
-const Row = ({ title, fetchUrl }) => {
+const Row = ({ title, fetchUrl, isFirstRow }) => {
   const [movies, setMovies] = useState([]);
+  const baseURL = "https://image.tmdb.org/t/p/original/";
 
   useEffect(() => {
     async function fetchData() {
@@ -14,16 +15,15 @@ const Row = ({ title, fetchUrl }) => {
     fetchData();
   }, [fetchUrl]);
 
-  console.log(movies);
-
   return (
     <div className="row">
       <h2>{title}</h2>
       <div className="row__posters">
         {movies.map((movie) => (
           <img
-            className="row__poster"
-            src={`${baseURL}${movie.poster_path}`}
+            key={movie.id}
+            className={`row__poster ${isFirstRow && 'row__posterLarge'}`}
+            src={`${baseURL}${isFirstRow ? movie.poster_path :  movie.backdrop_path}`}
             alt={movie.name}
           />
         ))}
